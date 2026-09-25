@@ -18,6 +18,8 @@ class ResultScreen extends StatelessWidget {
     final minutes = provider.totalTime.inMinutes;
     final seconds = provider.totalTime.inSeconds % 60;
 
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -25,61 +27,102 @@ class ResultScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                isGood ? Icons.celebration : Icons.emoji_events_outlined,
-                size: 90,
-                color: isGood ? AppColors.resultGoodText : AppColors.resultBad,
+              const Spacer(),
+
+              // 1. Dynamic Network Image based on Good / Bad Result
+              Image.network(
+                isGood
+                    ? 'https://media.istockphoto.com/id/2228047366/vector/congratulations-text-for-anniversary-birthday-party-christmas-new-year-graduate-cards.jpg?s=612x612&w=0&k=20&c=yjAchTmDhQjNGmUK4Fm992R3g0XcyQm45Ed7h5Lf_HQ=' // Good result illustration URL
+                    : 'https://static.vecteezy.com/system/resources/previews/023/891/661/non_2x/try-again-button-speech-bubble-banner-label-try-again-vector.jpg', // Bad result illustration URL
+                height: screenHeight * 0.25,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    isGood ? Icons.celebration : Icons.emoji_events_outlined,
+                    size: 100,
+                    color: isGood
+                        ? const Color(0xFF62D28E)
+                        : const Color(0xFFFF4D2D),
+                  );
+                },
               ),
-              const SizedBox(height: 16),
+
+              SizedBox(height: screenHeight * 0.03),
+
+              // 2. Result Header Title
               Text(
                 isGood ? 'Congratulation' : 'Keep Trying!',
-                style: const TextStyle(
-                  fontSize: 26,
+                style: TextStyle(
+                  fontSize: screenHeight * 0.038,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
+                  letterSpacing: 0.5,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'You scored $score/$total!',
-                style: const TextStyle(
-                    fontSize: 16, color: AppColors.textSecondary),
-              ),
-              const SizedBox(height: 16),
+
+              SizedBox(height: screenHeight * 0.025),
+
+              // 3. Score Badge (Matching UI design with light shadow border)
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                
+                padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
                 decoration: BoxDecoration(
-                  color: isGood ? AppColors.resultGood : AppColors.resultBad,
-                  borderRadius: BorderRadius.circular(24),
+                  color: isGood
+                      ? const Color(0xFF82EBAD) // Light Green
+                      : const Color(0xFFFF4D2D), // Vibrant Orange Red
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isGood
+                        ? const Color(0xFFA2F3C3)
+                        : const Color(0xFFFF8570),
+                    width: 2,
+                  ),
                 ),
                 child: Text(
                   '$accuracy%',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: screenHeight * 0.024,
                     fontWeight: FontWeight.bold,
-                    color: isGood
-                        ? AppColors.resultGoodText
-                        : AppColors.resultBadText,
+                    color: isGood ? const Color(0xFF1E5E3A) : Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                'Total time: ${minutes}m ${seconds}s',
-                style: const TextStyle(color: AppColors.textSecondary),
-              ),
-              const SizedBox(height: 8),
+
+              SizedBox(height: screenHeight * 0.025),
+
+              // 4. Subtitle Text
               Text(
                 isGood
                     ? "You've got a great foundation. Ready to try a different category?"
-                    : "Don't give up! Practice makes perfect. Try again to improve your score.",
+                    : "Dont give up! Practice makes perfect. Try again to improve your score",
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppColors.textSecondary),
+                style: TextStyle(
+                  fontSize: screenHeight * 0.018,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary.withOpacity(0.85),
+                  height: 1.4,
+                ),
               ),
-              const SizedBox(height: 28),
+
+              // Hidden Score & Time data for context reference (Optional / Retained)
+              const SizedBox(height: 8),
+              Text(
+                'Score: $score/$total | Time: ${minutes}m ${seconds}s',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: const Color.fromARGB(255, 115, 115, 126).withOpacity(0.6),
+                ),
+              ),
+
+              const Spacer(),
+
+              // 5. PLAY AGAIN Button (Rounded rectangle dark teal style)
               SizedBox(
                 width: double.infinity,
+                height: 56.0,
                 child: ElevatedButton(
                   onPressed: () {
                     provider.resetForReplay();
@@ -90,17 +133,24 @@ class ResultScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryDark,
+                    backgroundColor: const Color(0xFF006D63),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
-                  child: const Text('PLAY AGAIN',
-                      style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  child: Text(
+                    'PLAY AGAIN',
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.02,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
                 ),
               ),
+
               const SizedBox(height: 24),
             ],
           ),

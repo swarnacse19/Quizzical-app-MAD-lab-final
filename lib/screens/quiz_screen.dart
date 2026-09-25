@@ -127,7 +127,7 @@ class _QuizBody extends StatelessWidget {
             child: Text(
               question.question,
               style: const TextStyle(
-                fontSize: 17,
+                fontSize: 21,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
               ),
