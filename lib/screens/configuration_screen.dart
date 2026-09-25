@@ -24,68 +24,141 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<QuizProvider>();
+    final double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(Icons.tune, size: 72, color: AppColors.primaryDark),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: screenHeight * 0.01),
+
+              
+              Image.network(
+                'https://static.vecteezy.com/system/resources/previews/018/765/759/non_2x/quiz-guess-social-media-icon-in-flat-style-faq-illustration-on-isolated-background-help-button-sign-business-concept-vector.jpg', 
+                height: screenHeight * 0.22,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  
+                  return const Icon(
+                    Icons.tune,
+                    size: 80,
+                    color: AppColors.primaryDark,
+                  );
+                },
+              ),
+
+              SizedBox(height: screenHeight * 0.02),
+
+             
+              Text(
                 'Quizzical',
                 style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary),
+                  fontSize: screenHeight * 0.044, 
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                  letterSpacing: 0.5,
+                ),
               ),
-              const Text('Configuration',
-                  style: TextStyle(color: AppColors.textSecondary)),
+
+              const SizedBox(height: 4),
+
+              
+              Text(
+                'Configuration',
+                style: TextStyle(
+                  fontSize: screenHeight * 0.02,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+
+              const SizedBox(height: 2),
+
+              
               Text(
                 provider.selectedCategoryName ?? '',
-                style: const TextStyle(
-                    color: AppColors.textSecondary, fontSize: 13),
+                style: TextStyle(
+                  fontSize: screenHeight * 0.017,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textSecondary.withOpacity(0.9),
+                ),
               ),
-              const SizedBox(height: 28),
-              Align(
+
+              SizedBox(height: screenHeight * 0.03),
+
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Number of Questions',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary)),
+                child: Text(
+                  'Number of Questions',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
               ),
+
+              const SizedBox(height: 4),
+
               Row(
                 children: [
-                  const Text('Select 1-50',
-                      style: TextStyle(color: AppColors.textSecondary)),
+                  const Text(
+                    'Select 1–50',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
                   const Spacer(),
-                  Text('${provider.amount}',
-                      style: const TextStyle(
-                          color: AppColors.progressBar,
-                          fontWeight: FontWeight.bold)),
+                  Text(
+                    '${provider.amount}',
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Color(0xFF00A3FF), 
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
-              Slider(
-                min: 1,
-                max: 50,
-                divisions: 49,
-                value: provider.amount.toDouble(),
-                activeColor: AppColors.progressBar,
-                label: '${provider.amount}',
-                onChanged: (v) => provider.setAmount(v.round()),
+
+              SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  activeTrackColor: const Color(0xFF00A3FF),
+                  inactiveTrackColor: const Color(0xFF00A3FF).withOpacity(0.15),
+                  thumbColor: const Color(0xFF00A3FF),
+                  overlayColor: const Color(0xFF00A3FF).withOpacity(0.2),
+                  trackHeight: 6.0,
+                  thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                ),
+                child: Slider(
+                  min: 1,
+                  max: 50,
+                  divisions: 49,
+                  value: provider.amount.toDouble(),
+                  label: '${provider.amount}',
+                  onChanged: (v) => provider.setAmount(v.round()),
+                ),
               ),
+
               const SizedBox(height: 16),
-              Align(
+
+              // Difficulty Level
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Difficulty Level',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary)),
+                child: Text(
+                  'Difficulty Level',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               _Dropdown<String?>(
                 value: provider.difficulty,
                 items: const [
@@ -96,28 +169,38 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                 ],
                 onChanged: provider.setDifficulty,
               ),
+
               const SizedBox(height: 16),
-              Align(
+
+              // Question Type
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Question Type',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary)),
+                child: Text(
+                  'Question Type',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               _Dropdown<String?>(
                 value: provider.type,
                 items: const [
                   DropdownMenuItem(value: null, child: Text('Any Type')),
                   DropdownMenuItem(
                       value: 'multiple', child: Text('Multiple Choice')),
-                  DropdownMenuItem(value: 'boolean', child: Text('True / False')),
+                  DropdownMenuItem(
+                      value: 'boolean', child: Text('True / False')),
                 ],
                 onChanged: provider.setType,
               ),
-              const SizedBox(height: 32),
+
+              SizedBox(height: screenHeight * 0.04),
+
               SizedBox(
                 width: double.infinity,
+                height: 56.0,
                 child: OutlinedButton(
                   onPressed: () async {
                     await provider.startQuiz();
@@ -128,15 +211,21 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                     }
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.primaryDark,
-                    side: const BorderSide(color: AppColors.primaryDark, width: 1.5),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    foregroundColor: const Color(0xFF006D63), 
+                    side: const BorderSide(color: Color(0xFF006D63), width: 1.5),
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(16),
                     ),
                   ),
-                  child: const Text('START',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'START',
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.022,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -162,16 +251,22 @@ class _Dropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       decoration: BoxDecoration(
-        color: AppColors.cardWhite,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: Colors.grey.shade300, width: 1.2),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<T>(
           isExpanded: true,
           value: value,
+          icon: Icon(Icons.keyboard_arrow_down, color: Colors.grey.shade700),
+          style: const TextStyle(
+            fontSize: 15,
+            color: AppColors.textPrimary,
+            fontFamily: 'Roboto',
+          ),
           items: items,
           onChanged: (v) => onChanged(v as T),
         ),
