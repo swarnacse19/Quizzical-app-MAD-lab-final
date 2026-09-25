@@ -28,23 +28,19 @@ class CategoryCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           padding: const EdgeInsets.all(16),
-          child: Stack(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Icon(icon, color: Colors.white, size: 32),
+              Expanded(
+                child: Center(child: Icon(icon, color: Colors.black, size: 54)),
               ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: AppColors.textPrimary,
-                  ),
+              Text(
+                name,
+                softWrap: true,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: AppColors.textPrimary,
                 ),
               ),
             ],
