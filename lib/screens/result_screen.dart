@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/quiz_provider.dart';
 import '../utils/app_colors.dart';
-import 'configuration_screen.dart';
+import 'category_screen.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
@@ -31,10 +30,10 @@ class ResultScreen extends StatelessWidget {
             children: [
               const Spacer(),
 
-              Image.network(
+              Image.asset(
                 isGood
-                    ? 'https://media.istockphoto.com/id/2228047366/vector/congratulations-text-for-anniversary-birthday-party-christmas-new-year-graduate-cards.jpg?s=612x612&w=0&k=20&c=yjAchTmDhQjNGmUK4Fm992R3g0XcyQm45Ed7h5Lf_HQ=' 
-                    : 'https://static.vecteezy.com/system/resources/previews/023/891/661/non_2x/try-again-button-speech-bubble-banner-label-try-again-vector.jpg', 
+                    ? 'assets/images/congratulations.png'
+                    : 'assets/images/try_again.webp',
                 height: screenHeight * 0.3,
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
@@ -51,26 +50,24 @@ class ResultScreen extends StatelessWidget {
               SizedBox(height: screenHeight * 0.03),
 
               // 2. Result Header Title
-              // Text(
-              //   isGood ? 'Congratulation' : 'Keep Trying!',
-              //   style: TextStyle(
-              //     fontSize: screenHeight * 0.038,
-              //     fontWeight: FontWeight.bold,
-              //     color: AppColors.textPrimary,
-              //     letterSpacing: 0.5,
-              //   ),
-              // ),
+              Text(
+                isGood ? 'Congratulation' : 'Keep Trying!',
+                style: TextStyle(
+                  fontSize: screenHeight * 0.038,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                  letterSpacing: 0.5,
+                ),
+              ),
 
-              // SizedBox(height: screenHeight * 0.025),
+              SizedBox(height: screenHeight * 0.025),
 
-              // 3. Score Badge (Matching UI design with light shadow border)
               Container(
-                
-                padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 decoration: BoxDecoration(
                   color: isGood
-                      ? const Color(0xFF82EBAD) // Light Green
-                      : const Color(0xFFFF4D2D), // Vibrant Orange Red
+                      ? const Color(0xFF82EBAD)
+                      : const Color(0xFFFF4D2D),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isGood
@@ -92,7 +89,6 @@ class ResultScreen extends StatelessWidget {
 
               SizedBox(height: screenHeight * 0.025),
 
-              // 4. Subtitle Text
               Text(
                 isGood
                     ? "You've got a great foundation. Ready to try a different category?"
@@ -106,7 +102,6 @@ class ResultScreen extends StatelessWidget {
                 ),
               ),
 
-              // Hidden Score & Time data for context reference (Optional / Retained)
               const SizedBox(height: 8),
               Text(
                 'Score: $score/$total | Time: ${minutes}m ${seconds}s',
@@ -118,7 +113,6 @@ class ResultScreen extends StatelessWidget {
 
               const Spacer(),
 
-              // 5. PLAY AGAIN Button (Rounded rectangle dark teal style)
               SizedBox(
                 width: double.infinity,
                 height: 56.0,
@@ -126,8 +120,7 @@ class ResultScreen extends StatelessWidget {
                   onPressed: () {
                     provider.resetForReplay();
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (_) => const ConfigurationScreen()),
+                      MaterialPageRoute(builder: (_) => const CategoryScreen()),
                       (route) => route.isFirst,
                     );
                   },
