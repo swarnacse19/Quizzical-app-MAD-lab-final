@@ -18,6 +18,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
@@ -25,4 +26,9 @@ flutter:
     - assets/images/congratulations.png
     - assets/images/try_again.webp
     - assets/images/quiz.jpg
-    - assets/images/config.webp
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/quiz.jpg"
+  min_sdk_android: 21

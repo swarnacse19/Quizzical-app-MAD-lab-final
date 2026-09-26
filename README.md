@@ -6,13 +6,7 @@ A clean, responsive trivia quiz app built with **Flutter**, powered by the [Open
 
 ## 📸 Screenshots
 
-| Welcome | Category Selection | Configuration |
-|:---:|:---:|:---:|
-| <img src="screenshots/welcome.jpeg" width="200"> | <img src="screenshots/category.jpeg" width="200"> | <img src="screenshots/configuration.jpeg" width="200"> |
-
-| Quiz | Result (Success) | Result (Retry) |
-|:---:|:---:|:---:|
-| <img src="screenshots/quiz.jpeg" width="200"> | <img src="screenshots/success.jpeg" width="200"> | <img src="screenshots/retry.jpeg" width="200"> |
+<img src="screenshots/welcome.jpeg" width="120"> <img src="screenshots/category.jpeg" width="120"> <img src="screenshots/configuration.jpeg" width="120"> <img src="screenshots/quiz.jpeg" width="120"> <img src="screenshots/success.jpeg" width="120"> <img src="screenshots/retry.jpeg" width="120">
 
 ---
 
