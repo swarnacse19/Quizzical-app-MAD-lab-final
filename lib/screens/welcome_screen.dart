@@ -26,8 +26,8 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       const Spacer(),
 
-                      Image.network(
-                        'https://static.vecteezy.com/system/resources/previews/078/158/958/non_2x/cute-cartoon-brain-character-with-question-marks-and-an-exclamation-point-above-its-head-thinking-hard-vector.jpg', 
+                      Image.asset(
+                        'assets/images/quiz.jpg', 
                         height: screenHeight * 0.35, 
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {

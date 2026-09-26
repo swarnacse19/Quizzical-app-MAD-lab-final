@@ -24,3 +24,5 @@ flutter:
   assets:
     - assets/images/congratulations.png
     - assets/images/try_again.webp
+    - assets/images/quiz.jpg
+    - assets/images/config.webp

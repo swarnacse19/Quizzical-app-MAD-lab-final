@@ -40,8 +40,8 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                 children: [
                   SizedBox(height: screenHeight * 0.04), 
 
-                  Image.network(
-                    'https://static.vecteezy.com/system/resources/previews/018/765/759/non_2x/quiz-guess-social-media-icon-in-flat-style-faq-illustration-on-isolated-background-help-button-sign-business-concept-vector.jpg',
+                  Image.asset(
+                    'assets/images/config.webp',
                     height: screenHeight * 0.22,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
