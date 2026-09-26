@@ -27,28 +27,39 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+          padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              // Screen Title
+              Text(
                 'Quizzical',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: screenHeight * 0.038, // Responsive font size
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
+                  letterSpacing: 0.5,
                 ),
               ),
               const SizedBox(height: 4),
-              const Text(
+              // Subtitle
+              Text(
                 'choose a category to focus on:',
-                style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
+                style: TextStyle(
+                  color: AppColors.textSecondary.withOpacity(0.7),
+                  fontSize: screenHeight * 0.015,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: screenHeight * 0.025),
+
+              // Categories Grid View
               Expanded(
                 child: Consumer<QuizProvider>(
                   builder: (context, provider, _) {
@@ -68,12 +79,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       case LoadStatus.success:
                         return GridView.builder(
                           padding: const EdgeInsets.only(bottom: 24),
+                          physics: const BouncingScrollPhysics(),
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 14,
-                            mainAxisSpacing: 14,
-                            childAspectRatio: 1.05,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 0.88, // Matches screenshot aspect ratio
                           ),
                           itemCount: provider.categories.length,
                           itemBuilder: (context, index) {
@@ -84,6 +96,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               name: cat.name,
                               color: style.color,
                               icon: style.icon,
+                              imageUrl: style.imageUrl,
                               onTap: () {
                                 provider.selectCategory(cat.id, cat.name);
                                 Navigator.of(context).push(
