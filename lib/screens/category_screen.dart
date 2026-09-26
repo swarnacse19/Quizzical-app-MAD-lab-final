@@ -38,7 +38,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               const Text(
                 'Quizzical',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
                 ),
@@ -46,7 +46,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               const SizedBox(height: 4),
               const Text(
                 'choose a category to focus on:',
-                style: TextStyle(color: AppColors.textSecondary),
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
               ),
               const SizedBox(height: 16),
               Expanded(

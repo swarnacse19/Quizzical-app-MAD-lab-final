@@ -24,7 +24,8 @@ class QuizScreen extends StatelessWidget {
                 return const LoadingView(label: 'Loading questions...');
               case LoadStatus.error:
                 return ErrorRetryView(
-                  message: provider.questionError ?? 'Could not load questions.',
+                  message:
+                      provider.questionError ?? 'Could not load questions.',
                   onRetry: () => provider.startQuiz(),
                 );
               case LoadStatus.success:
@@ -69,29 +70,43 @@ class _QuizBody extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('$current/$total',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary)),
+              Text(
+                '$current/$total',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
               const SizedBox(width: 12),
               Row(
                 children: [
-                  const Icon(Icons.timer_outlined,
-                      size: 16, color: AppColors.textSecondary),
+                  const Icon(
+                    Icons.timer_outlined,
+                    size: 16,
+                    color: AppColors.textSecondary,
+                  ),
                   const SizedBox(width: 4),
-                  Text('${provider.timeLeft}s',
-                      style: const TextStyle(color: AppColors.textSecondary)),
+                  Text(
+                    '${provider.timeLeft}s',
+                    style: const TextStyle(color: AppColors.textSecondary),
+                  ),
                 ],
               ),
               const Spacer(),
               TextButton.icon(
                 onPressed: () {
-                  provider.cancelTimer();
-                  Navigator.of(context).popUntil((r) => r.isFirst);
+                  provider.resetForReplay();
+                  Navigator.of(context).pop();
                 },
-                icon: const Icon(Icons.logout, size: 16, color: AppColors.textPrimary),
-                label: const Text('EXIT',
-                    style: TextStyle(color: AppColors.textPrimary)),
+                icon: const Icon(
+                  Icons.logout,
+                  size: 16,
+                  color: AppColors.textPrimary,
+                ),
+                label: const Text(
+                  'EXIT',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
               ),
             ],
           ),
@@ -102,13 +117,16 @@ class _QuizBody extends StatelessWidget {
               value: progress,
               minHeight: 6,
               backgroundColor: Colors.grey.shade300,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.progressBar),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                AppColors.progressBar,
+              ),
             ),
           ),
           const SizedBox(height: 20),
-          Text('Score: ${provider.score}',
-              style: const TextStyle(color: AppColors.textSecondary)),
+          Text(
+            'Score: ${provider.score}',
+            style: const TextStyle(color: AppColors.textSecondary),
+          ),
           const SizedBox(height: 12),
           Container(
             width: double.infinity,
@@ -162,8 +180,10 @@ class _QuizBody extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: const Text('Next',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text(
+                'Next',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ],
