@@ -46,20 +46,20 @@ class WelcomeScreen extends StatelessWidget {
                       Text(
                         'Quizzical',
                         style: TextStyle(
-                          fontSize: screenHeight * 0.042, 
+                          fontSize: screenHeight * 0.038, 
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
                         ),
                       ),
 
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 5),
 
                       
                       Text(
                         'Saida Khanom Sharna',
                         style: TextStyle(
-                          fontSize: screenHeight * 0.026, 
-                          fontWeight: FontWeight.w600,
+                          fontSize: screenHeight * 0.022, 
+                          fontWeight: FontWeight.w500,
                           color: AppColors.textPrimary.withOpacity(0.8),
                         ),
                       ),

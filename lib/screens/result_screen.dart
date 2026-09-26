@@ -31,12 +31,11 @@ class ResultScreen extends StatelessWidget {
             children: [
               const Spacer(),
 
-              // 1. Dynamic Network Image based on Good / Bad Result
               Image.network(
                 isGood
-                    ? 'https://media.istockphoto.com/id/2228047366/vector/congratulations-text-for-anniversary-birthday-party-christmas-new-year-graduate-cards.jpg?s=612x612&w=0&k=20&c=yjAchTmDhQjNGmUK4Fm992R3g0XcyQm45Ed7h5Lf_HQ=' // Good result illustration URL
-                    : 'https://static.vecteezy.com/system/resources/previews/023/891/661/non_2x/try-again-button-speech-bubble-banner-label-try-again-vector.jpg', // Bad result illustration URL
-                height: screenHeight * 0.25,
+                    ? 'https://media.istockphoto.com/id/2228047366/vector/congratulations-text-for-anniversary-birthday-party-christmas-new-year-graduate-cards.jpg?s=612x612&w=0&k=20&c=yjAchTmDhQjNGmUK4Fm992R3g0XcyQm45Ed7h5Lf_HQ=' 
+                    : 'https://static.vecteezy.com/system/resources/previews/023/891/661/non_2x/try-again-button-speech-bubble-banner-label-try-again-vector.jpg', 
+                height: screenHeight * 0.3,
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
                   return Icon(
@@ -52,17 +51,17 @@ class ResultScreen extends StatelessWidget {
               SizedBox(height: screenHeight * 0.03),
 
               // 2. Result Header Title
-              Text(
-                isGood ? 'Congratulation' : 'Keep Trying!',
-                style: TextStyle(
-                  fontSize: screenHeight * 0.038,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                  letterSpacing: 0.5,
-                ),
-              ),
+              // Text(
+              //   isGood ? 'Congratulation' : 'Keep Trying!',
+              //   style: TextStyle(
+              //     fontSize: screenHeight * 0.038,
+              //     fontWeight: FontWeight.bold,
+              //     color: AppColors.textPrimary,
+              //     letterSpacing: 0.5,
+              //   ),
+              // ),
 
-              SizedBox(height: screenHeight * 0.025),
+              // SizedBox(height: screenHeight * 0.025),
 
               // 3. Score Badge (Matching UI design with light shadow border)
               Container(
